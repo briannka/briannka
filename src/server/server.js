@@ -46,7 +46,6 @@ app.get("/weather", (req, res) => {
   });
 })
 
-
 const port = 8000;
 app.listen(port, () => {
   console.log('this is working');

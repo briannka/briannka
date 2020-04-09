@@ -11,19 +11,19 @@
     <main id="main">
     <section>
         <div class="form">
-          <form id="form">
+          <form id="form" onsubmit="return Client.handleSubmission(event)">
             <p id="intro">
               Where are you traveling to?
             </p>
             <input
-              id="name"
+              id="city"
               type="text"
               name="city"
               value=""
               placeholder="Your input"
               required
             />
-            <button type="submit"
+            <button
               id="submit"
               type="submit"
               name="submit"
