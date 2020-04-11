@@ -1,15 +1,16 @@
-/* Global Variables */
+import { postData } from './request';
 
-/* Function to GET Web API Data*/
+export const handleFormSubmit =  async e => {
+  e.preventDefault();
 
-/* Function to POST data */
+  const city = document.getElementById('city').value;
 
-console.log('::testing::');
-const handleFormSubmit = (e) => {
-  console.log(1111);
-  //Get input value and call first method getCity(async/await)
-  //Use values returned from API (lat, lon) to call next method
-  //Then with the result call the third API
+  const cityData = await postData('http://localhost:8080/city', { city });
+
+  const { lat, lon } = cityData;
+
+  const weather = await postData('http://localhost:8080/weather', { lat, lon });
+
+  // const { lat, lon } = await postData('http://localhost:8080/city', { city })
+  // const weather = await postData('http://localhost:8080/weather', { lat, lon });
 }
-
-export default handleFormSubmit;
