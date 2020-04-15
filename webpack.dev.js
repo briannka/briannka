@@ -9,6 +9,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: "./src/client/index.js",
   mode: "development",
+  devServer: {
+    port: 8000
+  },
   optimization: {
     minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})]
   },

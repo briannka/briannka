@@ -1,3 +1,8 @@
+//Global object
+
+cityData = {};
+weatherData = {};
+
 // Imported functions
 const geonames = require('./geonames');
 const fetch = require('node-fetch');
@@ -34,11 +39,16 @@ app.post("/city", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
+  const lat = req.body.lat;
+  const lon = req.body.lon;
+  weatherData.lat = lat;
+  weatherData.lon = lon;
   const secretKey = 'a53b81b6e6aaa6c4367dfe55c5001474';
-  const url = `https://api.darksky.net/forecast/${secretKey}/40.71427,-74.00597`;
+  const url = `https://api.darksky.net/forecast/${secretKey}/${lat},${lon}`;
   fetch(url)
   .then(res => res.json())
   .then(data => {
+      console.log(data);
       res.send({ data });
   })
   .catch(err => {
@@ -46,7 +56,7 @@ app.get("/weather", (req, res) => {
   });
 })
 
-const port = 8000;
+const port = 8080;
 app.listen(port, () => {
   console.log('this is working');
   console.log(`running on localhost: ${port}`);
