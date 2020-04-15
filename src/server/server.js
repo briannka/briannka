@@ -1,18 +1,17 @@
-// Setup empty JS object to act as endpoint for all routes
-projectData = {};
+//Global object
 
-// Require Express to run server and routes
+cityData = {};
+weatherData = {};
+
+// Imported functions
+const geonames = require('./geonames');
+const fetch = require('node-fetch');
+
+// Setup empty JS object to act as endpoint for all routes
 const express = require("express");
 const path = require("path");
-const apiKey = "30345c8bb3254064fa5aa95b2598b854";
-const baseUrl = "api.openweathermap.org/data/2.5/weather?zip=";
-const fetch = require("node-fetch");
 const cors = require("cors");
-
-// Start up an instance of app
 const app = express();
-
-// Dependencies
 const bodyParser = require("body-parser");
 
 /* Middleware*/
@@ -22,61 +21,43 @@ app.use(bodyParser.json());
 
 // Cors for cross origin allowance
 app.use(cors());
-
 // Initialize the main project folder
-app.use(express.static("website"));
+app.use('/', express.static(path.join(__dirname, '../client/views')));
 
-app.post("/weather", async function(req, res) {
-  let zip = req.body.zip;
-  let feelings = req.body.feelings;
-  projectData.zip = zip;
-  projectData.feelings = feelings;
-  try {
-    const result = await callWeatherApi(zip);
-    // console.log("Result in final function: ", result);
-    const { weather, main, name } = result;
-    const { description } = weather[0];
-    console.log({
-      name,
-      temperature: main.temp,
-      weather: description
-    });
-
-    res.send({
-      name,
-      temperature: main.temp,
-      weather: description,
-      feelings
-    });
-  } catch (reason) {
-    console.log("error", reason);
-  }
+app.post("/city", (req, res) => {
+  const searchedCity = req.body.city;
+  console.log(searchedCity);
+  geonames
+    .getCity(searchedCity)
+    .then( (result) => {
+      console.log('Result is ', result);
+      res.send(JSON.stringify(result));
+    })
+    .catch( err => {
+      res.status(500).send('No Results');
+    })
 });
 
-app.get("/getWeather", returnJournalData);
+app.get("/weather", (req, res) => {
+  const lat = req.body.lat;
+  const lon = req.body.lon;
+  weatherData.lat = lat;
+  weatherData.lon = lon;
+  const secretKey = 'a53b81b6e6aaa6c4367dfe55c5001474';
+  const url = `https://api.darksky.net/forecast/${secretKey}/${lat},${lon}`;
+  fetch(url)
+  .then(res => res.json())
+  .then(data => {
+      console.log(data);
+      res.send({ data });
+  })
+  .catch(err => {
+      res.send(err);
+  });
+})
 
-function getWeatherURL(zip) {
-  return `http://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${apiKey}`;
-}
-
-const callWeatherApi = async zip => {
-  const url = getWeatherURL(zip);
-
-  const response = await fetch(url);
-  try {
-    const newData = await response.json();
-    console.log("Result of API: ", newData);
-    return newData;
-  } catch (error) {
-    console.log("error:", error);
-  }
-};
-
-function returnJournalData(req, res) {
-  res.send(projectData);
-}
-
-const port = 8000;
-const server = app.listen(port, () => {
+const port = 8080;
+app.listen(port, () => {
+  console.log('this is working');
   console.log(`running on localhost: ${port}`);
 });

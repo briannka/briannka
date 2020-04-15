@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Travel App</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo"></div>
+    </header>
+    <main id="main">
+    <section>
+        <div class="form">
+          <form id="form" onsubmit="return Client.handleSubmission(event)">
+            <p id="intro">
+              Where are you traveling to?
+            </p>
+            <input
+              id="city"
+              type="text"
+              name="city"
+              value=""
+              placeholder="Your input"
+              required
+            />
+            <div id="dates">
+              <label for="start" id="start">Start Date:</label>
+              <input type="date"
+              id="start_date" 
+              name="trip-start"
+              value=""
+              min="2020-04-01" 
+              max="2020-04-31"
+              >
+            </div>
+            <button type="submit"
+              id="submit"
+              type="submit"
+              name="submit"
+              value="Submit"
+            >Submit</button>
+          </form>
+        </div>
+    </section>
+    <section>
+    </section>
+        <h2>The weather should be...</h2>
+        <div class="results">
+          <div id="expected-weather"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+  <footer>
+    <p>Enjoy your trip!</p>
+  </footer>
+</html>
