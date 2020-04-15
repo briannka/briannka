@@ -9,6 +9,5 @@ export const postData = async (url = '', data = {})  => {
     },
     body: JSON.stringify(data)
   });
-
   return response.json(); 
 }
