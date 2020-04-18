@@ -1,16 +1,60 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-rows: auto; 
+}
+
 #main {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-} 
-#expected-weather {
-    border: 2px solid peachpuff;
 }
+
 body {
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+
+#cityValue {
+display: flex;
+flex-direction: row;
+justify-items: center;
+background: #f23557;
+}
+
+#summaryRes {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  background: #f23557;
+}
+
+#iconRes {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  background: #f23557;
+}
+
+#imgRes {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  background: #f23557;
+}
 
 #app {
   display: grid;
