@@ -12,6 +12,6 @@ If the trip is in the future, you will get a predicted forecast.
 
 ## How to run the project 
 
-`npm run start:server` to start the server
-`npm run start:dev` to start dev mode 
-`npm run build-prod` to build production mode
+`npm run start:server` to start the server <br>
+`npm run start:dev` to start dev mode <br>
+`npm run build-prod` to build production mode <br>
