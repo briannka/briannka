@@ -1,7 +1,6 @@
 import { postData, getData } from './js/request';
+import { getIcons } from './js/icons.js';
 import '../styles/styles.scss';
-
-
 
 export const getTripDetails = async city => {
   let allData = [];
@@ -9,7 +8,7 @@ export const getTripDetails = async city => {
   const cityData = await postData('http://localhost:8080/city', { city });
   if(cityData) {
     response = {city};
-    allData.push = city;
+    allData.push(city);
     const { lat, lon } = cityData;
     const weather = await postData('http://localhost:8080/weather', { lat, lon });
     if(weather) {
@@ -18,8 +17,9 @@ export const getTripDetails = async city => {
       const { summary, icon } = daily;
       response.summary = summary;
       response.icon = icon;
-      allData.push = summary;
-      allData.push = icon;
+      // let iconImg = getIcons(icon);
+      // console.log(iconImg);
+      allData.push(summary, icon);
     }
   const image = await getData('http://localhost:8080/img', city);
   fetch(`https://pixabay.com/api/?key=16086675-eba9ea2a392ce2c4e2ca4c2d7&q=${city}&image_type=photo&category=travel`)
@@ -33,26 +33,30 @@ export const getTripDetails = async city => {
     return pixImg;
   })
 }
-  return response;
   updateUI(allData);
+  return response;
 }
 
 const updateUI = async allData => {
   try {
-    const {
+    const [
       searchedCity,
       summary,
       icon,
       pixImg
-    } = allData;
+     ] = allData;
     const cityValue = document.getElementById("cityValue");
     const summaryRes = document.getElementById("summaryRes");
     const iconRes = document.getElementById("iconRes");
-    const imgRes = document.getElementById("imgRes");
-    cityValue.innerHTML = `You searched for ${city}`;
+    const imgRes = document.getElementById("image");
+    // const imgContainer = document.createElement("img");
+    cityValue.innerHTML = `You searched for ${searchedCity}`;
     summaryRes.innerHTML = `The expected weather there is ${summary}`;
     iconRes.innerHTML = `${icon}`;
-    imgRes.innerHTML = `${pixImg}`;
+    const imageCreation = new Image();
+    imageCreation.src = pixImg;
+    imgRes.appendChild(pixImg);
+    // imgContainer.appendChild(imageCreation);
   } catch (error) {
     console.log("error", error);
   }
