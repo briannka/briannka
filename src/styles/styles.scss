@@ -1,28 +1,37 @@
 .wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, 200px);
-  grid-template-rows: auto; 
+  grid-template-rows: repeat(auto, 1fr); 
 }
 
-#main {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
+.paragraph {
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  margin: 20px;
+}
+
+figure {
+	margin: 5em auto;
+	width: 350px;
+	height: 150px;
 }
 
 body {
-    background-image: url('../media/background.jpg');
-    background-repeat: no-repeat;
-    background-size: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  }
+  background-image: url('../media/background.jpg');
+  background-attachment: fixed;
+  background-repeat: cover;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 
 .container {
   display: flex;
+  // grid-column: 3 / 6;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  justify-self: center;
 }
 .results {
   display: flex;
@@ -31,10 +40,10 @@ body {
 }
 
 #cityValue {
-display: flex;
-flex-direction: row;
-justify-items: center;
-background: #f23557;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  background: #f23557;
 }
 
 #summaryRes {
@@ -58,18 +67,18 @@ background: #f23557;
   background: #f23557;
 }
 
-#app {
-  display: grid;
-  grid-auto-rows: minmax(150px, auto);
-  /* grid-template-columns:  */
-  height: 100vh;
-  background: #f23557;
-  color: #f0d43a;
-  justify-content: center;
-  grid-gap: 1em;
-  font-size: 20px;
-  font-family: "Oswald", sans-serif;
-}
+// #app {
+//   display: grid;
+//   grid-auto-rows: minmax(150px, auto);
+//   /* grid-template-columns:  */
+//   height: 100vh;
+//   background: #f23557;
+//   color: #f0d43a;
+//   justify-content: center;
+//   grid-gap: 1em;
+//   font-size: 20px;
+//   font-family: "Oswald", sans-serif;
+// }
 
 .form {
   display: flex;
@@ -83,23 +92,24 @@ background: #f23557;
   z-index: 10000;
 }  
 
-/*  Basic Styling To Override Default For Basic HTML Elements */
-label {
-  display: block;
-  font-size: 27px;
+#header-img {
+  background-image: url('../media/logo.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
+/*  Basic Styling To Override Default For Basic HTML Elements */
 
 #city {
   margin-bottom: 20px;
-
 }
 
-input {
+.input {
   display: block;
   height: 60px;
   width: 320px;
-  background: #22b2da;
-  color: #f0d43a;
+  background: #005a5a;
+  color: #baf4ce;
   font-size: 20px;
   font-family: "Oswald", sans-serif;
   border: none;
@@ -128,15 +138,7 @@ h1 {
 }
 
 #start {
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-}
-
-#end {
-  display: flex;
-  flex-direction: column;
-  
+  padding-bottom: 20px;
 }
 
 #submit {
@@ -149,6 +151,7 @@ textarea {
   font-size: 20px;
   font-family: "Oswald", sans-serif;
 }
+
 /* Reset style for HTML element on active to have no border*/
 input:focus,
 select:focus,
