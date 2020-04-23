@@ -26,19 +26,19 @@ app.use('/', express.static(path.join(__dirname, '../client/views')));
 
 app.post("/city", (req, res) => {
   const searchedCity = req.body.city;
-  console.log(searchedCity);
+  cityData.city = searchedCity;
   geonames
     .getCity(searchedCity)
     .then( (result) => {
-      console.log('Result is ', result);
       res.send(JSON.stringify(result));
     })
-    .catch( err => {
-      res.status(500).send('No Results');
-    })
+    .catch(err => {
+      const response = null;
+      res.status(404).send(JSON.stringify(response));
+    });
 });
 
-app.get("/weather", (req, res) => {
+app.post("/weather", (req, res) => {
   const lat = req.body.lat;
   const lon = req.body.lon;
   weatherData.lat = lat;
@@ -58,6 +58,5 @@ app.get("/weather", (req, res) => {
 
 const port = 8080;
 app.listen(port, () => {
-  console.log('this is working');
   console.log(`running on localhost: ${port}`);
 });
