@@ -26,14 +26,11 @@ app.use('/', express.static(path.join(__dirname, '../client/views')));
 
 app.post("/city", (req, res) => {
   const searchedCity = req.body.city;
+  cityData.city = searchedCity;
   geonames
     .getCity(searchedCity)
     .then( (result) => {
-      console.log('Result is ', result);
       res.send(JSON.stringify(result));
-    })
-    .then( () => {
-      return getPixabay;
     })
     .catch(err => {
       const response = null;
@@ -59,17 +56,7 @@ app.post("/weather", (req, res) => {
   });
 })
 
-// const getPixabay = async (searchedCity) => {
-//       const pixabayFetch = await fetch(`https://pixabay.com/api/?key=16086675-eba9ea2a392ce2c4e2ca4c2d7&q=${searchedCity}&image_type=photo&category=travel`)
-//       .then( (result) => {
-//         console.log('Image is' + result);
-//         res.send(JSON.stringify(result));
-//       } )
-// }
-
-
 const port = 8080;
 app.listen(port, () => {
-  console.log('this is working');
   console.log(`running on localhost: ${port}`);
 });

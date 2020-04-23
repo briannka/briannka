@@ -5,10 +5,7 @@
     <title>Travel App</title>
   </head>
   <body class="wrapper">
-    <header>
-    </header>
-    <main id="main">
-    <section>
+    <section id="main">
         <div class="container">
           <p class="paragraph">
             Where are you traveling to?
@@ -20,7 +17,6 @@
               type="text"
               name="city"
               value=""
-              placeholder="Your Input"
               required
             />
             <div>
@@ -28,11 +24,13 @@
               id="start_date"
               for="start" 
               id="start">
-              Start Date:
+              <p class="paragraph"
+              >Start Date:
+              </p>
             </label>
               <input type="date"
               class="input"
-              id="city"
+              id="date_input"
               name="trip-start"
               value=""
               min="2020-04-21" 
@@ -46,15 +44,17 @@
               type="submit"
               name="submit"
               value="Submit"
-            >Submit</button>
+            >Let's go!
+          </button>
           </form>
         </div>
     </section>
-    <section class="container">
+    <section>
         <div class="results">
-          <h2>The weather should be...</h2>
-          <div id="cityValue"></div>
-          <div id="summaryRes"></div>
+          <h2>This is what I got for you</h2>
+          <div class="res-txt" id="cityValue"></div>
+          <div class="res-date" id="dateValue"></div>
+          <div class="res-txt" id="summaryRes"></div>
           <div id="iconRes">
               <canvas class="icon" width="128" height="128"></canvas>
           </div>
@@ -62,6 +62,5 @@
           </div>
         </div>
       </section>
-    </main>
   </body>
 </html>
