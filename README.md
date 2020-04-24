@@ -9,6 +9,7 @@ If the trip is in the future, you will get a predicted forecast.
 * Dark Sky API 
 * Geonames API
 * Pixabay API
+* Skycons
 
 ## How to run the project 
 
