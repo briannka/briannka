@@ -1,14 +1,5 @@
 const Geonames = require("geonames.js");
 
-// const parseCities = (cities) => {
-//     let responses = cities.map(city => {
-//         console.log(city); 
-//         return city;
-//     })
-//     return responses;
-// }
-
-
 const getCity = (input) => {
     const geonames = new Geonames({
       username: 'briannka',

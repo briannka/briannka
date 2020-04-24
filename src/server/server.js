@@ -48,7 +48,6 @@ app.post("/weather", (req, res) => {
   fetch(url)
   .then(res => res.json())
   .then(data => {
-      console.log(data);
       res.send({ data });
   })
   .catch(err => {
@@ -60,3 +59,5 @@ const port = 8080;
 app.listen(port, () => {
   console.log(`running on localhost: ${port}`);
 });
+
+module.exports = app;
