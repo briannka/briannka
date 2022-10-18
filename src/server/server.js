@@ -24,40 +24,40 @@ app.use(cors());
 // Initialize the main project folder
 app.use('/', express.static(path.join(__dirname, '../client/views')));
 
-app.post("/city", (req, res) => {
-  const searchedCity = req.body.city;
-  cityData.city = searchedCity;
-  geonames
-    .getCity(searchedCity)
-    .then( (result) => {
-      res.send(JSON.stringify(result));
-    })
-    .catch(err => {
-      const response = null;
-      res.status(404).send(JSON.stringify(response));
-    });
-});
+// app.post("/city", (req, res) => {
+//   const searchedCity = req.body.city;
+//   cityData.city = searchedCity;
+//   geonames
+//     .getCity(searchedCity)
+//     .then( (result) => {
+//       res.send(JSON.stringify(result));
+//     })
+//     .catch(err => {
+//       const response = null;
+//       res.status(404).send(JSON.stringify(response));
+//     });
+// });
 
-app.post("/weather", (req, res) => {
-  const lat = req.body.lat;
-  const lon = req.body.lon;
-  weatherData.lat = lat;
-  weatherData.lon = lon;
-  const secretKey = 'a53b81b6e6aaa6c4367dfe55c5001474';
-  const url = `https://api.darksky.net/forecast/${secretKey}/${lat},${lon}`;
-  fetch(url)
-  .then(res => res.json())
-  .then(data => {
-      res.send({ data });
-  })
-  .catch(err => {
-      res.send(err);
-  });
-})
+// app.post("/weather", (req, res) => {
+//     const lat = req.body.lat;
+//     const lon = req.body.lon;
+//     weatherData.lat = lat;
+//     weatherData.lon = lon;
+//     const secretKey = 'a53b81b6e6aaa6c4367dfe55c5001474';
+//     const url = `https://api.darksky.net/forecast/${secretKey}/${lat},${lon}`;
+//     fetch(url)
+//         .then(res => res.json())
+//         .then(data => {
+//             res.send({ data });
+//         })
+//         .catch(err => {
+//             res.send(err);
+//         });
+// })
 
 const port = 8080;
 app.listen(port, () => {
-  console.log(`running on localhost: ${port}`);
+    console.log(`running on localhost: ${port}`);
 });
 
 module.exports = app;

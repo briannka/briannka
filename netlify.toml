@@ -1,0 +1,13 @@
+[build]
+    publish = "dist/"
+    functions = "functions"
+
+[[redirects]]
+from = "/weather/*"
+to = "https://api.darksky.net/forecast/:splat/:splat,:splat"
+status = 200
+
+[[redirects]]
+from = "/city/*"
+to = "/city"
+status = 200
